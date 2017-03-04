@@ -1,0 +1,8 @@
+- [ ] Iptables
+- [ ] IPS Fail2ban
+- [ ] WAF NAXSI
+- [ ] Dotfiles
+- [ ] Docker
+- [ ] Nginx: https://certsimple.com/blog/nginx-http2-load-balancing-config
+- [ ] Clamav
+- [ ] Backups auto
