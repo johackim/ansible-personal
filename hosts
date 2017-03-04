@@ -1,0 +1,3 @@
+[ovh]
+ovh ansible_port=2222 ansible_user=admin ansible_become=true ansible_become_user=root
+
