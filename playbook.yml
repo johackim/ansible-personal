@@ -1,0 +1,27 @@
+---
+- name: Installation
+  hosts: ovh
+  vars:
+      user: admin
+
+  roles:
+      - user
+
+  tasks:
+      - name: Package installation
+        apt: name={{ item }} update_cache=yes state=latest
+        with_items:
+            - git
+            - htop
+            - vim
+            - ncdu
+            - silversearcher-ag
+            - unzip
+            - make
+            - sudo
+            - zsh
+            - wget
+            - curl
+            - tmux
+            - nmap
+...
