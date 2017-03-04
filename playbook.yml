@@ -16,12 +16,17 @@
             - vim
             - ncdu
             - silversearcher-ag
+            - zip
             - unzip
+            - locate
             - make
+            - cmake
+            - telnet
             - sudo
             - zsh
             - wget
             - curl
             - tmux
             - nmap
+            - apt-file
 ...
