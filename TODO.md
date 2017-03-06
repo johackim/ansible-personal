@@ -6,3 +6,4 @@
 - [ ] Nginx: https://certsimple.com/blog/nginx-http2-load-balancing-config
 - [ ] Clamav
 - [ ] Backups auto
+- [ ] Nodejs
