@@ -4,6 +4,7 @@
 - [ ] Dotfiles
 - [ ] Docker
 - [ ] Nginx: https://certsimple.com/blog/nginx-http2-load-balancing-config
-- [ ] Clamav
+- [ ] Clamav, lynis
 - [ ] Backups auto
 - [ ] Nodejs
+- [ ] Motd

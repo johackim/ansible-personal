@@ -6,6 +6,8 @@
 
   roles:
       - user
+      - docker
+      - dokku
 
   tasks:
       - name: Package installation
