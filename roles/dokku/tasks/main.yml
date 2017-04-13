@@ -1,0 +1,12 @@
+---
+
+- apt_key:
+    url: "https://packagecloud.io/gpg.key"
+
+- apt_repository:
+    repo: deb https://packagecloud.io/dokku/dokku/ubuntu/ trusty main
+
+- apt:
+    name: dokku
+    update_cache: yes
+    state: latest

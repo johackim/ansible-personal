@@ -1,0 +1,18 @@
+---
+
+- apt:
+    name: apt-transport-https
+
+- apt_key:
+    keyserver: hkp://p80.pool.sks-keyservers.net:80
+    id: 58118E89F3A912897C070ADBF76221572C52609D
+
+- apt_repository:
+    repo: deb https://apt.dockerproject.org/repo debian-jessie main
+
+- name: Install list of packages
+  apt: name={{item}} state=installed
+  with_items:
+      - ca-certificates
+      - gnupg2
+      - docker-engine
