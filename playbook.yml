@@ -1,6 +1,6 @@
 ---
 - name: Installation
-  hosts: ovh
+  hosts: '{{ target }}'
   vars:
       user: admin
 
@@ -29,4 +29,5 @@
             - tmux
             - nmap
             - apt-file
+            - lynis
 ...
