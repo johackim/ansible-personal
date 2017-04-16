@@ -1,0 +1,8 @@
+---
+
+- name: Add iptables firewall script
+  template: src=templates/firewall dest=/usr/local/bin/firewall mode=0755
+
+- name: Execute firewall
+  shell: firewall
+  when: execute_firewall

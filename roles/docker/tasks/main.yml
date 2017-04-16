@@ -13,6 +13,6 @@
 - name: Install list of packages
   apt: name={{item}} state=installed
   with_items:
-      - ca-certificates
-      - gnupg2
-      - docker-engine
+    - ca-certificates
+    - gnupg2
+    - docker-engine

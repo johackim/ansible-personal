@@ -1,0 +1,16 @@
+---
+
+- name: ensure fail2ban is installed
+  apt: pkg=fail2ban state=latest update_cache=true
+
+- name: ensure fail2ban starts on reboot
+  service: name=fail2ban state=started enabled=yes
+
+- name: copy fail2ban configuration
+  copy: src=/etc/fail2ban/fail2ban.conf dest=/etc/fail2ban/fail2ban.local
+
+- name: copy jail configuration
+  copy: src=/etc/fail2ban/jail.conf dest=/etc/fail2ban/jail.local
+
+- name: restart service
+  systemd: state=restarted daemon_reload=yes name=fail2ban

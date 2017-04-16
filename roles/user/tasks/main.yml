@@ -1,7 +1,18 @@
 ---
+
 - name: Create {{ user }} user
   user: name={{ user }} shell=/usr/bin/zsh groups=sudo,users
+
 - name: Add ssh key to {{ user }} user
   authorized_key: user={{ user }} key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+
 - name: Add {{ user }} to sudoers
   template: src=templates/sudoers.j2 dest=/etc/sudoers.d/{{ user }}-sudoer validate='visudo -cf %s'
+
+- name: Disallow root login
+  replace: dest=/etc/ssh/sshd_config regexp='^PermitRootLogin yes$' replace='PermitRootLogin no' backup=yes
+  when: disallow_root_login
+
+- name: Reload sshd service
+  systemd: state=reloaded daemon_reload=yes name=sshd
+  when: disallow_root_login
