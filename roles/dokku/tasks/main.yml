@@ -8,5 +8,5 @@
 
 - apt:
     name: dokku
-    update_cache: yes
+    update_cache: 'yes'
     state: latest

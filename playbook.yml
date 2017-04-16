@@ -3,9 +3,13 @@
   hosts: '{{ target }}'
   vars:
       user: admin
+      disallow_root_login: false
+      execute_firewall: false
 
   roles:
       - user
+      - iptables
+      - fail2ban
       - docker
       - dokku
 
