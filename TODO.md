@@ -1,8 +1,8 @@
-- [ ] Iptables
-- [ ] IPS Fail2ban
+- [x] Iptables
+- [x] IPS Fail2ban
+- [x] Docker
+- [x] Dotfiles
 - [ ] WAF NAXSI
-- [ ] Dotfiles
-- [ ] Docker
 - [ ] Nginx: https://certsimple.com/blog/nginx-http2-load-balancing-config
 - [ ] Clamav, lynis
 - [ ] Backups auto
