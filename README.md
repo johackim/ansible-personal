@@ -1,17 +1,21 @@
-Ansible-ovh
+Ansible-playbook
 ===
 
-My personal OVH playbook
+My personal ansible playbook
 
 Run
 ---
 
-`make run`
+```
+make server=local run
+```
 
 Test
 ---
 
-`make test`
+```
+make test
+```
 
 License
 ---
