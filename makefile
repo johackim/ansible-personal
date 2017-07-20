@@ -1,11 +1,11 @@
-run:
-	ansible-playbook playbook.yml --extra-vars "target=ovh"
+server?=local
 
-run-local:
-	ansible-playbook -i hosts playbook.yml --extra-vars "target=local"
+run:
+	@ cp -n hosts.dist hosts
+	@ ansible-playbook playbook.yml -i hosts --extra-vars "target=${server}"
 
 dry-run:
-	ansible-playbook playbook.yml --check --extra-vars "target=ovh"
+	@ ansible-playbook playbook.yml -i hosts --check --extra-vars "target=${server}"
 
 test:
-	ansible -i hosts all -m ping
+	@ ansible -i hosts all -m ping
