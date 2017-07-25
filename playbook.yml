@@ -14,8 +14,6 @@
       - dokku
 
   tasks:
-      - name: Add dotfiles
-        git: repo=https://github.com/stoneo/dotfiles dest=/home/{{ user }}/.dotfiles version=server update=no
       - name: Package installation
         apt: name={{ item }} update_cache=yes state=latest
         with_items:
