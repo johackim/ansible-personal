@@ -2,9 +2,9 @@
 - [x] IPS Fail2ban
 - [x] Docker
 - [x] Dotfiles
+- [x] Motd
 - [ ] WAF NAXSI
 - [ ] Nginx: https://certsimple.com/blog/nginx-http2-load-balancing-config
 - [ ] Clamav, lynis
 - [ ] Backups auto
 - [ ] Nodejs
-- [ ] Motd
