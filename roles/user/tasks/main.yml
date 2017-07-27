@@ -5,6 +5,7 @@
 
 - name: Add ssh key to {{ user }} user
   authorized_key: user={{ user }} key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+  when: not ansible_check_mode
 
 - name: Add {{ user }} to sudoers
   template: src=templates/sudoers.j2 dest=/etc/sudoers.d/{{ user }}-sudoer validate='visudo -cf %s'
