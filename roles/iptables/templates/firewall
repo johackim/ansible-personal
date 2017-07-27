@@ -1,12 +1,10 @@
 #!/bin/sh
 
 DAEMON=/sbin/iptables
-NAME=firewall
-DESC="iptables based firewall"
 
 test -x $DAEMON || exit 0
 
-if [ `whoami` != "root" ]; then
+if [ "$(whoami)" != "root" ]; then
   echo "$0: Permission non accordée"
   exit 1;
 fi 
