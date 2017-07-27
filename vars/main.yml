@@ -13,3 +13,7 @@ firewall_enabled_at_boot: true
 firewall_allowed_tcp_ports:
   - "22"
   - "80"
+sysctl_overwrite:
+  net.ipv4.conf.default.log_martians: 1
+  kernel.kptr_restrict: 2
+  kernel.core_uses_pid: 1
