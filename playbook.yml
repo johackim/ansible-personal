@@ -12,7 +12,7 @@
       - motd
       - iptables
       - fail2ban
-      - docker
+      - { role: docker, when docker.stat.exists == false }
       - dokku
 
   tasks:
