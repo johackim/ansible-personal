@@ -13,34 +13,10 @@
             bantime: -1
 
   roles:
+      - apt
       - user
       - motd
       - iptables
       - fail2ban
       - { role: docker, when docker.stat.exists == false }
-      # - dokku
-
-  tasks:
-      - name: Package installation
-        apt: name={{ item }} update_cache=yes state=latest
-        with_items:
-            - git
-            - htop
-            - vim
-            - ncdu
-            - silversearcher-ag
-            - zip
-            - unzip
-            - locate
-            - make
-            - cmake
-            - telnet
-            - sudo
-            - zsh
-            - wget
-            - curl
-            - tmux
-            - nmap
-            - apt-file
-            - lynis
 ...
