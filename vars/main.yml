@@ -1,0 +1,15 @@
+---
+user: admin
+disallow_root_login: false
+execute_firewall: true
+manala_motd_template: "{{ playbook_dir ~ '/templates/motd.j2' }}"
+fail2ban_services:
+  - name: ssh
+    port: 22
+    maxretry: 5
+    bantime: -1
+firewall_state: started
+firewall_enabled_at_boot: true
+firewall_allowed_tcp_ports:
+  - "22"
+  - "80"
