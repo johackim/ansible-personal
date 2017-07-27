@@ -14,7 +14,7 @@
       - fail2ban
       - { role: user, when: add_user == true }
       - { role: docker, when docker.stat.exists == false }
-      - dokku
+      # - dokku
 
   tasks:
       - name: Package installation
