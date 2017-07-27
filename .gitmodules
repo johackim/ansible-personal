@@ -1,3 +1,6 @@
 [submodule "roles/motd"]
 	path = roles/motd
 	url = https://github.com/manala/ansible-role-motd
+[submodule "roles/fail2ban"]
+	path = roles/fail2ban
+	url = https://github.com/ston3o/ansible-fail2ban
