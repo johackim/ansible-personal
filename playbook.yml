@@ -10,5 +10,6 @@
     - motd
     - firewall
     - fail2ban
+    - os-hardening
     - { role: docker, when docker.stat.exists == false }
 ...

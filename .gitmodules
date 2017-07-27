@@ -7,3 +7,6 @@
 [submodule "roles/firewall"]
 	path = roles/firewall
 	url = https://github.com/geerlingguy/ansible-role-firewall
+[submodule "roles/os-hardening"]
+	path = roles/os-hardening
+	url = https://github.com/dev-sec/ansible-os-hardening

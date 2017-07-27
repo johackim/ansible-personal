@@ -21,5 +21,14 @@
     - tmux
     - nmap
     - apt-file
+
+- name: Security packages installation
+  apt: name={{ item }} update_cache=yes state=latest
+  with_items:
     - lynis
     - unattended-upgrades
+    - debsums
+    - debsecan
+    - needrestart
+    - debian-goodies
+    - apt-listbugs
