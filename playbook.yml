@@ -5,9 +5,11 @@
       user: admin
       disallow_root_login: false
       execute_firewall: false
+      manala_motd_template: "{{ playbook_dir ~ '/templates/motd.j2' }}"
 
   roles:
       - user
+      - motd
       - iptables
       - fail2ban
       - docker
