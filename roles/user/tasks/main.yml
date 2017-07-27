@@ -1,10 +1,10 @@
 ---
 
 - name: Create {{ user }} user
-  user: name={{ user }} shell=/usr/bin/zsh groups=sudo,users
+  user: name={{ user }} shell=/bin/bash groups=sudo,users
 
 - name: Add ssh key to {{ user }} user
-  authorized_key: user={{ user }} key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+  authorized_key: user={{ user }} key={{ lookup('file', '~/.ssh/id_rsa.pub') }}
   when: not ansible_check_mode
 
 - name: Add {{ user }} to sudoers
@@ -17,3 +17,16 @@
 - name: Reload sshd service
   systemd: state=reloaded daemon_reload=yes name=sshd
   when: disallow_root_login
+
+- name: Add dotfiles
+  git: repo=https://github.com/ston3o/dotfiles dest=/home/{{ user }}/.dotfiles update=n
+  become_user: "{{ user }}"
+  become: true
+
+- name: Add tmux.conf
+  file: src=/home/{{ user }}/.dotfiles/{{ item }} dest=/home/{{ user }}/{{ item }} state=link
+  become_user: "{{ user }}"
+  become: true
+  with_items:
+      - .tmux.conf
+      - .tmux
