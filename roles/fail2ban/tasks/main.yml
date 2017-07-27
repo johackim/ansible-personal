@@ -5,6 +5,7 @@
 
 - name: ensure fail2ban starts on reboot
   service: name=fail2ban state=started enabled=yes
+  when: not ansible_check_mode
 
 - name: copy fail2ban configuration
   copy: src=/etc/fail2ban/fail2ban.conf dest=/etc/fail2ban/fail2ban.local
@@ -14,3 +15,4 @@
 
 - name: restart service
   systemd: state=restarted daemon_reload=yes name=fail2ban
+  when: not ansible_check_mode
