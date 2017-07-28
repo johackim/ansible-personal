@@ -1,16 +1,21 @@
 ---
 
+- name: Add jessie-backports repository
+  apt_repository:
+    repo: deb http://mirrors.digitalocean.com/debian jessie-backports main
+    state: present
+
 - name: Package installation
-  apt: name=nginx update_cache=yes state=latest
+  apt: name=nginx update_cache=yes state=latest default_release=jessie-backports
 
 - include_role:
     name: nginx-hardening
 
-- name: Disable nginx SSL Settings
-  replace: dest=/etc/nginx/nginx.conf regexp={{ item.regexp }} replace={{ item.replace }} backup=true
+- name: Remove nginx directives to fix nginx-hardening conflicts
+  lineinfile: dest=/etc/nginx/nginx.conf regexp={{ item.regexp }} state=absent backup=true
   with_items:
-    - { regexp: 'ssl_protocols', replace: '# ssl_protocols' }
-    - { regexp: 'ssl_prefer_server_ciphers', replace: '# ssl_prefer_server_ciphers' }
+    - { regexp: 'ssl_protocols' }
+    - { regexp: 'ssl_prefer_server_ciphers' }
 
 - name: Block bad bots
   get_url: url={{ item.url }} dest={{ item.dest }}
