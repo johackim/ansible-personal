@@ -1,5 +1,10 @@
 ---
 
+- name: Clean apt lists directory
+  file:
+    path: /var/lib/apt/lists/*
+    state: absent
+
 - name: Package installation
   apt: name={{ item }} update_cache=yes state=latest
   with_items:
