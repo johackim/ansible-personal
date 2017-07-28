@@ -1,12 +1,12 @@
 ---
 
-- name: Add jessie-backports repository
+- name: Add backports repository
   apt_repository:
-    repo: deb http://mirrors.digitalocean.com/debian jessie-backports main
+    repo: deb http://mirrors.digitalocean.com/debian {{ ansible_lsb.codename }}-backports main
     state: present
 
 - name: Package installation
-  apt: name=nginx update_cache=yes state=latest default_release=jessie-backports
+  apt: name=nginx update_cache=yes state=latest default_release={{ ansible_lsb.codename }}-backports
 
 - include_role:
     name: nginx-hardening
