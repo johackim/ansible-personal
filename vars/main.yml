@@ -19,3 +19,4 @@ sysctl_overwrite:
   kernel.core_uses_pid: 1
 ssh_allow_root_with_key: true
 sftp_enabled: true
+dokku_version: "v0.10.3"
