@@ -1,7 +1,5 @@
 ---
 user: admin
-disallow_root_login: false
-execute_firewall: true
 manala_motd_template: "{{ playbook_dir ~ '/templates/motd.j2' }}"
 fail2ban_services:
   - name: ssh
@@ -13,7 +11,11 @@ firewall_enabled_at_boot: true
 firewall_allowed_tcp_ports:
   - "22"
   - "80"
+  - "443"
 sysctl_overwrite:
   net.ipv4.conf.default.log_martians: 1
+  net.ipv4.conf.all.forwarding: 0
   kernel.kptr_restrict: 2
   kernel.core_uses_pid: 1
+ssh_allow_root_with_key: true
+sftp_enabled: true

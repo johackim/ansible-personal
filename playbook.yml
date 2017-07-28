@@ -6,10 +6,13 @@
 
   roles:
     - apt
-    - user
     - motd
     - firewall
     - fail2ban
+    - unattended-upgrades
+    - docker
+    - nginx
+    - ssh-hardening
     - os-hardening
-    - { role: docker, when docker.stat.exists == false }
+    - user # NOTICE: Keep this role after ssh-hardening
 ...

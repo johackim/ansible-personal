@@ -7,16 +7,11 @@
   authorized_key: user={{ user }} key={{ lookup('file', '~/.ssh/id_rsa.pub') }}
   when: not ansible_check_mode
 
+- name: Unlock ssh user # NOTICE: After execute ssh-hardening role
+  shell: usermod -p "*" {{ user }}
+
 - name: Add {{ user }} to sudoers
   template: src=templates/sudoers.j2 dest=/etc/sudoers.d/{{ user }}-sudoer validate='visudo -cf %s'
-
-- name: Disallow root login
-  replace: dest=/etc/ssh/sshd_config regexp='^PermitRootLogin yes$' replace='PermitRootLogin no' backup=yes
-  when: disallow_root_login
-
-- name: Reload sshd service
-  systemd: state=reloaded daemon_reload=yes name=sshd
-  when: disallow_root_login
 
 - name: Add dotfiles
   git: repo=https://github.com/ston3o/dotfiles dest=/home/{{ user }}/.dotfiles update=n
