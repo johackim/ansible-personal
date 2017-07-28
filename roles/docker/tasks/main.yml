@@ -19,7 +19,7 @@
     repo: deb https://apt.dockerproject.org/repo debian-{{ ansible_lsb.codename }} main
   when: not docker.stat.exists
 
-- name: Install list of packages
+- name: Install docker
   apt: name={{item}} state=installed
   when: not docker.stat.exists
   with_items:
