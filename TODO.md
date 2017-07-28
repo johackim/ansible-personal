@@ -1,10 +1,11 @@
 - [x] Iptables
 - [x] IPS Fail2ban
 - [x] Docker
-- [x] Dotfiles
 - [x] Motd
+- [x] Dotfiles
+- [x] Unattended upgrades
+- [ ] clamav, rkhunter, chkrootkit, OSSEC, Lynis
 - [ ] WAF NAXSI
-- [ ] Nginx: https://certsimple.com/blog/nginx-http2-load-balancing-config
-- [ ] Clamav, lynis
 - [ ] Backups auto
 - [ ] Nodejs
+- [ ] https://github.com/lyrasis/ansible-linux-security-role
