@@ -6,15 +6,15 @@ My personal ansible playbook
 Run
 ---
 
-```
-make server=local run
+```bash
+ansible-playbook playbook.yml -u <user> -i <host>,
 ```
 
-Test
+Vagrant
 ---
 
-```
-make test
+```bash
+vagrant up
 ```
 
 License

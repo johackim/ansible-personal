@@ -1,6 +1,6 @@
 ---
 - name: Installation
-  hosts: '{{ target }}'
+  hosts: all
   vars_files:
     - vars/main.yml
 
