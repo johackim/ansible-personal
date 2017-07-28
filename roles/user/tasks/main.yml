@@ -1,7 +1,7 @@
 ---
 
 - name: Create {{ user }} user
-  user: name={{ user }} shell=/bin/bash groups=sudo,users
+  user: name={{ user }} shell=/bin/bash groups=sudo,users,docker
 
 - name: Add ssh key to {{ user }} user
   authorized_key: user={{ user }} key={{ lookup('file', '~/.ssh/id_rsa.pub') }}
