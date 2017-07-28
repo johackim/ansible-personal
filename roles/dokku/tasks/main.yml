@@ -1,12 +1,20 @@
 ---
 
-- apt_key:
-    url: "https://packagecloud.io/gpg.key"
+- stat:
+    path: /usr/bin/dokku
+  register: dokku
 
-- apt_repository:
-    repo: deb https://packagecloud.io/dokku/dokku/ubuntu/ trusty main
+- name: Download dokku
+  get_url: url=https://raw.githubusercontent.com/dokku/dokku/{{ dokku_version }}/bootstrap.sh dest=/root/bootstrap.sh
+  when: not dokku.stat.exists
 
-- apt:
-    name: dokku
-    update_cache: 'yes'
-    state: latest
+- name: Install dokku
+  shell: DOKKU_TAG={{ dokku_version }} /bin/bash /root/bootstrap.sh
+  when: not dokku.stat.exists
+
+- name: Remove nginx directives to fix dokku conflicts
+  lineinfile: dest={{ item.dest }} regexp={{ item.regexp }} state=absent backup=true
+  with_items:
+    - { dest: /etc/nginx/conf.d/dokku.conf, regexp: 'server_tokens' }
+    - { dest: /etc/nginx/conf.d/dokku.conf, regexp: 'ssl_ciphers' }
+    - { dest: /etc/nginx/conf.d/90.hardening.conf, regexp: 'nosniff' }
