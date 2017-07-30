@@ -13,7 +13,7 @@
     - nodejs
     - unattended-upgrades
     - docker
-    - nginx
+    - nginx-modsecurity
     - dokku # NOTICE: Keep this role after nginx
     - ssh-hardening
     - os-hardening
