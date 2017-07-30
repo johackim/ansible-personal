@@ -20,3 +20,5 @@ sysctl_overwrite:
 ssh_allow_root_with_key: true
 sftp_enabled: true
 dokku_version: "v0.10.3"
+nodejs_npm_global_packages:
+  - name: yarn

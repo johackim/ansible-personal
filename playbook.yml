@@ -9,6 +9,7 @@
     - motd
     - firewall
     - fail2ban
+    - nodejs
     - unattended-upgrades
     - docker
     - nginx
