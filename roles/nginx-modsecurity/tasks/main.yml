@@ -69,6 +69,10 @@
 
     - shell: rm /opt/*.deb
 
+    # Prevent nginx update
+
+    - shell: apt-mark hold nginx nginx-full
+
     # Nginx-hardening
 
     - include_role:
