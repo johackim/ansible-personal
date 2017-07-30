@@ -1,0 +1,88 @@
+---
+
+- stat:
+    path: /usr/sbin/nginx
+  register: nginx
+
+- block:
+    # Dependencies
+
+    - name: Build nginx dependencies
+      apt: pkg=nginx state=build-dep
+
+    - name: Install dependencies
+      apt: name={{ item }} update_cache=yes state=latest
+      with_items:
+        - libcurl4-openssl-dev
+        - apache2-dev
+
+    # Modsecurity
+
+    - name: Git clone modsecurity
+      git: repo=https://github.com/SpiderLabs/ModSecurity dest=/opt/modsecurity version=nginx_refactoring update=no
+
+    - name: Build modsecurity
+      shell: cd /opt/modsecurity/ && ./autogen.sh && ./configure --enable-standalone-module && make
+
+    # Nginx
+
+    - name: Git clone nginx
+      git: repo=https://anonscm.debian.org/cgit/pkg-nginx/nginx.git dest=/opt/nginx version={{ ansible_lsb.codename }} update=no
+
+    - replace: dest=/opt/nginx/debian/rules regexp='\./configure \$' replace='./configure --add-module=/opt/modsecurity/nginx/modsecurity $' backup=yes
+
+    - name: Install nginx packages
+      shell: cd /opt/nginx && dpkg-buildpackage -b && dpkg -i /opt/nginx-common_*.deb /opt/libnginx-mod-*.deb /opt/nginx-full_*.deb
+
+    # Enable modsecurity
+
+    - shell: cp /opt/modsecurity/modsecurity.conf-recommended /etc/nginx/modsecurity.conf
+    - shell: cp /opt/modsecurity/unicode.mapping /etc/nginx/unicode.mapping
+    - replace: dest=/etc/nginx/modsecurity.conf regexp='^\s*SecRuleEngine DetectionOnly' replace='SecRuleEngine On' backup=true
+    - replace:
+        dest: /etc/nginx/nginx.conf
+        regexp: 'http \{'
+        replace: 'http {\n        ModSecurityEnabled on;\n        ModSecurityConfig modsecurity.conf;'
+        backup: true
+
+    # Install owasp rules
+
+    - name: Git clone owasp
+      git: repo=https://github.com/SpiderLabs/owasp-modsecurity-crs.git dest=/opt/owasp update=no
+
+    - shell: cp -r /opt/owasp/rules/ /etc/nginx/
+    - shell: cp /opt/owasp/crs-setup.conf.example /etc/nginx/crs-setup.conf
+    - shell: echo 'Include crs-setup.conf' >> /etc/nginx/modsecurity.conf
+    - shell: echo 'Include rules/*.conf' >> /etc/nginx/modsecurity.conf
+
+    # Fix permissions
+
+    - replace: dest=/etc/nginx/modsecurity.conf regexp='#SecAuditLogStorageDir' replace='SecAuditLogStorageDir' backup=true
+    - replace: dest=/etc/nginx/modsecurity.conf regexp='SecAuditLogType Serial' replace='SecAuditLogType Concurrent' backup=true
+
+    - shell: mkdir -p /opt/modsecurity/var/audit
+    - shell: mkdir -p /opt/modsecurity/var/log
+    - shell: chmod -R 777 /opt/modsecurity/var/
+
+    # Cleanup
+
+    - shell: rm /opt/*.deb
+
+    # Nginx-hardening
+
+    - include_role:
+        name: nginx-hardening
+
+    - name: remove nginx directives to fix nginx-hardening conflicts
+      lineinfile: dest=/etc/nginx/nginx.conf regexp={{ item.regexp }} state=absent backup=true
+      with_items:
+        - { regexp: 'ssl_protocols' }
+        - { regexp: 'ssl_prefer_server_ciphers' }
+
+    - name: block bad bots
+      get_url: url={{ item.url }} dest={{ item.dest }}
+      with_items:
+        - { url: "https://raw.githubusercontent.com/mariusv/nginx-badbot-blocker/master/blacklist.conf", dest: /etc/nginx/conf.d/blacklist.conf }
+        - { url: "https://raw.githubusercontent.com/mariusv/nginx-badbot-blocker/master/blockips.conf", dest: /etc/nginx/conf.d/blockips.conf }
+
+  when: not nginx.stat.exists
