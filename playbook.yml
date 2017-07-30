@@ -1,4 +1,5 @@
 ---
+
 - name: Installation
   hosts: all
   vars_files:
