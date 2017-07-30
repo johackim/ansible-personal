@@ -13,6 +13,7 @@
     - name: Install dependencies
       apt: name={{ item }} update_cache=yes state=latest
       with_items:
+        - git
         - libcurl4-openssl-dev
         - apache2-dev
 
