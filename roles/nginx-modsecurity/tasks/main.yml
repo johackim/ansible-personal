@@ -56,10 +56,11 @@
     - shell: echo 'Include crs-setup.conf' >> /etc/nginx/modsecurity.conf
     - shell: echo 'Include rules/*.conf' >> /etc/nginx/modsecurity.conf
 
-    # Fix permissions
+    # Custom modsecurity configuration
 
     - replace: dest=/etc/nginx/modsecurity.conf regexp='#SecAuditLogStorageDir' replace='SecAuditLogStorageDir' backup=true
-    - replace: dest=/etc/nginx/modsecurity.conf regexp='SecAuditLogType Serial' replace='SecAuditLogType Concurrent' backup=true
+    - replace: dest=/etc/nginx/modsecurity.conf regexp='SecAuditLogType Serial' replace='SecAuditLogType Concurrent'
+    - replace: dest=/etc/nginx/modsecurity.conf regexp='SecRequestBodyAccess On' replace='SecRequestBodyAccess Off'
 
     - shell: mkdir -p /opt/modsecurity/var/audit
     - shell: mkdir -p /opt/modsecurity/var/log
