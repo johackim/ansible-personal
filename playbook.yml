@@ -9,7 +9,7 @@
     - apt
     - motd
     - firewall
-    - fail2ban
+    # - fail2ban
     - nodejs
     - unattended-upgrades
     - docker
