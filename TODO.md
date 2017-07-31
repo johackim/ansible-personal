@@ -4,8 +4,8 @@
 - [x] Motd
 - [x] Dotfiles
 - [x] Unattended upgrades
-- [ ] WAF NAXSI
+- [x] WAF Modsecurity
+- [x] Nodejs
 - [ ] clamav, rkhunter, chkrootkit, OSSEC, Lynis
 - [ ] Backups auto
-- [ ] Nodejs
 - [ ] https://github.com/lyrasis/ansible-linux-security-role
