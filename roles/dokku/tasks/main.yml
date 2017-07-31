@@ -23,3 +23,12 @@
     - { dest: /etc/nginx/conf.d/dokku.conf, regexp: 'server_tokens' }
     - { dest: /etc/nginx/conf.d/dokku.conf, regexp: 'ssl_ciphers' }
     - { dest: /etc/nginx/conf.d/90.hardening.conf, regexp: 'nosniff' }
+
+- shell: dokku plugin:install https://github.com/dokku/dokku-redirect.git
+  ignore_errors: true
+
+- shell: dokku plugin:install https://github.com/dokku/dokku-letsencrypt.git
+  ignore_errors: true
+
+- shell: dokku plugin:install https://github.com/dokku/dokku-mysql.git
+  ignore_errors: true
