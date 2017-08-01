@@ -25,4 +25,4 @@ nodejs_npm_global_packages:
   - name: yarn
   - name: nvm
 nginx_client_max_body_size: "2M"
-nginx_limit_conn: "default 30"
+nginx_limit_conn: "default 100"
