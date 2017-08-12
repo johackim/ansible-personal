@@ -68,7 +68,7 @@
 
     # Cleanup
 
-    - shell: rm /opt/*.deb
+    - shell: rm -f /opt/*.deb /opt/*.changes /opt/*.buildinfo
 
     # Prevent nginx update
 
