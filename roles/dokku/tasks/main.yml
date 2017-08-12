@@ -1,20 +1,15 @@
 ---
 
-- stat:
-    path: /usr/bin/dokku
-  register: dokku
+- name: install apt-transport-https
+  apt: name=apt-transport-https
 
-- name: Download dokku
-  get_url: url=https://raw.githubusercontent.com/dokku/dokku/{{ dokku_version }}/bootstrap.sh dest=/root/bootstrap.sh
-  when: not dokku.stat.exists
+- apt_key: url=https://packagecloud.io/gpg.key state=present
+
+- name: Add dokku repository
+  apt_repository: repo="deb https://packagecloud.io/dokku/dokku/ubuntu/ trusty main" state=present
 
 - name: Install dokku
-  shell: DEBIAN_FRONTEND=noninteractive INITRD=No DOKKU_TAG={{ dokku_version }} /bin/bash /root/bootstrap.sh
-  when: not dokku.stat.exists
-  register: task_result
-  until: task_result.rc == 0
-  retries: 2
-  delay: 1
+  apt: name=dokku update_cache=true state=latest
 
 - name: Remove nginx directives to fix dokku conflicts
   lineinfile: dest={{ item.dest }} regexp={{ item.regexp }} state=absent backup=true
@@ -22,6 +17,9 @@
     - { dest: /etc/nginx/conf.d/dokku.conf, regexp: 'server_tokens' }
     - { dest: /etc/nginx/conf.d/dokku.conf, regexp: 'ssl_ciphers' }
     - { dest: /etc/nginx/conf.d/90.hardening.conf, regexp: 'nosniff' }
+
+- shell: dokku plugin:install-dependencies --core || true
+  ignore_errors: true
 
 - shell: dokku plugin:install https://github.com/dokku/dokku-redirect.git || true
   ignore_errors: true
