@@ -12,8 +12,8 @@
     # - fail2ban
     - nodejs
     - unattended-upgrades
-    - docker
     - nginx-modsecurity
+    - docker
     - dokku # NOTICE: Keep this role after nginx
     - ssh-hardening
     - os-hardening
