@@ -30,17 +30,23 @@
     # Modsecurity
 
     - name: Git clone modsecurity
-      git: repo=https://github.com/SpiderLabs/ModSecurity dest=/opt/modsecurity version=nginx_refactoring update=no
+      git: repo=https://github.com/SpiderLabs/ModSecurity dest=/opt/modsecurity version=v3/master update=no
 
     - name: Build modsecurity
-      shell: cd /opt/modsecurity/ && ./autogen.sh && ./configure --enable-standalone-module && make
+      shell: cd /opt/modsecurity/ && ./build.sh && ./configure && make && make install
+
+    - name: Git clone modsecurity-nginx
+      git: repo=https://github.com/SpiderLabs/ModSecurity-nginx dest=/opt/modsecurity-nginx update=no
 
     # Nginx
 
     - name: Git clone nginx
       git: repo=https://anonscm.debian.org/cgit/pkg-nginx/nginx.git dest=/opt/nginx version={{ ansible_lsb.codename }}-backports update=no
 
-    - replace: dest=/opt/nginx/debian/rules regexp='\./configure \$' replace='./configure --add-module=/opt/modsecurity/nginx/modsecurity $' backup=yes
+    - replace: dest=/opt/nginx/debian/rules regexp='\./configure \$' replace='./configure --add-module=/opt/modsecurity-nginx $' backup=true
+
+    - name: Override nginx config
+      shell: grep override_dh_shlibdeps /opt/nginx/debian/rules || printf '\noverride_dh_shlibdeps:\n\tdh_shlibdeps --dpkg-shlibdeps-params=--ignore-missing-info' >> /opt/nginx/debian/rules
 
     - name: Install nginx packages
       shell: cd /opt/nginx && dpkg-buildpackage -b && dpkg -i /opt/nginx-common_*.deb /opt/libnginx-mod-*.deb /opt/nginx-full_*.deb /opt/nginx_*.deb
@@ -48,12 +54,11 @@
     # Enable modsecurity
 
     - shell: cp /opt/modsecurity/modsecurity.conf-recommended /etc/nginx/modsecurity.conf
-    - shell: cp /opt/modsecurity/unicode.mapping /etc/nginx/unicode.mapping
     - replace: dest=/etc/nginx/modsecurity.conf regexp='^\s*SecRuleEngine DetectionOnly' replace='SecRuleEngine On' backup=true
     - replace:
         dest: /etc/nginx/nginx.conf
         regexp: 'http \{'
-        replace: 'http {\n        ModSecurityEnabled on;\n        ModSecurityConfig modsecurity.conf;'
+        replace: 'http {\n\tmodsecurity on;\n\tmodsecurity_rules_file /etc/nginx/modsecurity.conf;'
         backup: true
 
     # Install owasp rules
