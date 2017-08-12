@@ -7,15 +7,25 @@
 - block:
     # Dependencies
 
+    - name: Add backports repository
+      apt_repository:
+        repo: deb http://deb.debian.org/debian {{ ansible_lsb.codename }}-backports main
+        state: present
+
     - name: Build nginx dependencies
       apt: pkg=nginx state=build-dep
 
     - name: Install dependencies
-      apt: name={{ item }} update_cache=yes state=latest
+      apt: name={{ item }} update_cache=yes state=latest default_release={{ ansible_lsb.codename }}-backports
       with_items:
         - git
         - libcurl4-openssl-dev
         - apache2-dev
+        - libtool
+        - autoconf
+        - libhiredis-dev
+        - libssl-dev
+        - quilt
 
     # Modsecurity
 
