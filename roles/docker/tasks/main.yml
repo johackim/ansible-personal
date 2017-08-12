@@ -18,7 +18,7 @@
         repo: deb https://apt.dockerproject.org/repo debian-{{ ansible_lsb.codename }} main
 
     - name: Install docker
-      apt: name={{item}} state=installed
+      apt: name={{ item }} state=installed
       with_items:
         - ca-certificates
         - gnupg2

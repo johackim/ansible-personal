@@ -27,7 +27,7 @@
     - apt-file
 
 - name: Security packages installation
-  apt: name={{ item }} update_cache=yes state=latest
+  apt: name={{ item }} state=latest
   with_items:
     - lynis
     - debsums
