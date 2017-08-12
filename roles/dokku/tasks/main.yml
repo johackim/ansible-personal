@@ -15,7 +15,6 @@
   until: task_result.rc == 0
   retries: 2
   delay: 1
-  ignore_errors: true
 
 - name: Remove nginx directives to fix dokku conflicts
   lineinfile: dest={{ item.dest }} regexp={{ item.regexp }} state=absent backup=true
