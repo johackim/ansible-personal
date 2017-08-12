@@ -32,3 +32,6 @@
 
 - shell: dokku plugin:install https://github.com/dokku/dokku-mysql.git || true
   ignore_errors: true
+
+- shell: dokku plugin:install https://github.com/dokku/dokku-mongo.git || true
+  ignore_errors: true
