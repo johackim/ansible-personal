@@ -38,12 +38,12 @@
     # Nginx
 
     - name: Git clone nginx
-      git: repo=https://anonscm.debian.org/cgit/pkg-nginx/nginx.git dest=/opt/nginx version={{ ansible_lsb.codename }} update=no
+      git: repo=https://anonscm.debian.org/cgit/pkg-nginx/nginx.git dest=/opt/nginx version={{ ansible_lsb.codename }}-backports update=no
 
     - replace: dest=/opt/nginx/debian/rules regexp='\./configure \$' replace='./configure --add-module=/opt/modsecurity/nginx/modsecurity $' backup=yes
 
     - name: Install nginx packages
-      shell: cd /opt/nginx && dpkg-buildpackage -b && dpkg -i /opt/nginx-common_*.deb /opt/libnginx-mod-*.deb /opt/nginx-full_*.deb
+      shell: cd /opt/nginx && dpkg-buildpackage -b && dpkg -i /opt/nginx-common_*.deb /opt/libnginx-mod-*.deb /opt/nginx-full_*.deb /opt/nginx_*.deb
 
     # Enable modsecurity
 
