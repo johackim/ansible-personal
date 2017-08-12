@@ -6,6 +6,9 @@
 - [x] Unattended upgrades
 - [x] WAF Modsecurity
 - [x] Nodejs
+- [ ] Fix motd user
 - [ ] clamav, rkhunter, chkrootkit, OSSEC, Lynis
+- [ ] Docker-compose
 - [ ] Backups auto
 - [ ] https://github.com/lyrasis/ansible-linux-security-role
+- [ ] Swap
