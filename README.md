@@ -1,7 +1,7 @@
 Ansible-playbook
 ===
 
-> My personal ansible playbook for debian stretch
+> My personal ansible playbook for debian
 
 Quick Start
 ---
