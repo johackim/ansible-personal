@@ -43,10 +43,10 @@
     - name: Git clone nginx
       git: repo=https://anonscm.debian.org/cgit/pkg-nginx/nginx.git dest=/opt/nginx version={{ ansible_lsb.codename }}-backports update=no
 
-    - replace: dest=/opt/nginx/debian/rules regexp='\./configure \$' replace='./configure --add-module=/opt/modsecurity-nginx $' backup=true
+    - replace: dest=/opt/nginx/debian/rules regexp='\./configure \$' replace='./configure --add-module=/opt/modsecurity-nginx $'
 
     - name: Override nginx config
-      shell: grep override_dh_shlibdeps /opt/nginx/debian/rules || printf '\noverride_dh_shlibdeps:\n\tdh_shlibdeps --dpkg-shlibdeps-params=--ignore-missing-info' >> /opt/nginx/debian/rules
+      shell: grep override_dh_shlibdeps /opt/nginx/debian/rules || echo '\noverride_dh_shlibdeps:\n\tdh_shlibdeps --dpkg-shlibdeps-params=--ignore-missing-info' >> /opt/nginx/debian/rules
 
     - name: Install nginx packages
       shell: cd /opt/nginx && dpkg-buildpackage -b && dpkg -i /opt/nginx-common_*.deb /opt/libnginx-mod-*.deb /opt/nginx-full_*.deb /opt/nginx_*.deb
@@ -54,7 +54,7 @@
     # Enable modsecurity
 
     - shell: cp /opt/modsecurity/modsecurity.conf-recommended /etc/nginx/modsecurity.conf
-    - replace: dest=/etc/nginx/modsecurity.conf regexp='^\s*SecRuleEngine DetectionOnly' replace='SecRuleEngine On' backup=true
+    - replace: dest=/etc/nginx/modsecurity.conf regexp='^\s*SecRuleEngine DetectionOnly' replace='SecRuleEngine On'
     - replace:
         dest: /etc/nginx/nginx.conf
         regexp: 'http \{'
@@ -71,16 +71,6 @@
     - shell: echo 'Include crs-setup.conf' >> /etc/nginx/modsecurity.conf
     - shell: echo 'Include rules/*.conf' >> /etc/nginx/modsecurity.conf
 
-    # Custom modsecurity configuration
-
-    - replace: dest=/etc/nginx/modsecurity.conf regexp='#SecAuditLogStorageDir' replace='SecAuditLogStorageDir' backup=true
-    - replace: dest=/etc/nginx/modsecurity.conf regexp='SecAuditLogType Serial' replace='SecAuditLogType Concurrent'
-    - replace: dest=/etc/nginx/modsecurity.conf regexp='SecRequestBodyAccess On' replace='SecRequestBodyAccess Off'
-
-    - shell: mkdir -p /opt/modsecurity/var/audit
-    - shell: mkdir -p /opt/modsecurity/var/log
-    - shell: chmod -R 777 /opt/modsecurity/var/
-
     # Cleanup
 
     - shell: rm -f /opt/*.deb /opt/*.changes /opt/*.buildinfo
@@ -95,10 +85,12 @@
         name: nginx-hardening
 
     - name: remove nginx directives to fix nginx-hardening conflicts
-      lineinfile: dest=/etc/nginx/nginx.conf regexp={{ item.regexp }} state=absent backup=true
+      lineinfile: dest=/etc/nginx/nginx.conf regexp={{ item.regexp }} state=absent
       with_items:
         - { regexp: 'ssl_protocols' }
         - { regexp: 'ssl_prefer_server_ciphers' }
+
+    # Bad bots
 
     - name: block bad bots
       get_url: url={{ item.url }} dest={{ item.dest }}
