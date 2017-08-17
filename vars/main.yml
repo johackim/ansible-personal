@@ -16,6 +16,9 @@ firewall_allowed_tcp_ports:
   - "143"
   - "587"
   - "993"
+firewall_allowed_udp_ports:
+  - "60001"
+  - "60002"
 sysctl_overwrite:
   net.ipv4.conf.default.log_martians: 1
   net.ipv4.conf.all.forwarding: 1
