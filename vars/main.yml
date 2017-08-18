@@ -29,7 +29,7 @@ ssh_allow_root_with_key: true
 sftp_enabled: true
 nodejs_npm_global_packages:
   - name: yarn
-  - name: nvm
+  # - name: nvm
 nginx_client_max_body_size: "2M"
 nginx_limit_conn: "default 100"
 nginx_remove_default_site: false
