@@ -6,16 +6,15 @@
     - vars/main.yml
 
   roles:
-    - apt
-    - motd
-    - firewall
-    # - fail2ban
-    - nodejs
-    - unattended-upgrades
-    - nginx-modsecurity
-    - docker
-    - dokku # NOTICE: Keep this role after nginx and docker roles
-    - ssh-hardening
-    - os-hardening
-    - user # NOTICE: Keep this role after ssh-hardening
+    - { role: apt, tags: 'apt' }
+    - { role: motd, tags: 'motd' }
+    - { role: firewall, tags: 'firewall' }
+    # - { role: fail2ban, tags: 'fail2ban' }
+    - { role: nodejs, tags: 'nodejs' }
+    - { role: unattended-upgrades, tags: 'unattended-upgrades' }
+    - { role: nginx-modsecurity, tags: 'nginx-modsecurity' }
+    - { role: dokku, tags: 'dokku' } # NOTICE: Keep this role after nginx
+    - { role: ssh-hardening, tags: 'ssh-hardening' }
+    - { role: os-hardening, tags: 'os-hardening' }
+    - { role: user, tags: 'user' } # NOTICE: Keep this role after ssh-hardening
 ...
