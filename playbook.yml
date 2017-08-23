@@ -9,7 +9,7 @@
     - { role: apt, tags: 'apt' }
     - { role: motd, tags: 'motd' }
     - { role: firewall, tags: 'firewall' }
-    # - { role: fail2ban, tags: 'fail2ban' }
+    - { role: fail2ban, tags: 'fail2ban' }
     - { role: nodejs, tags: 'nodejs' }
     - { role: unattended-upgrades, tags: 'unattended-upgrades' }
     - { role: nginx-modsecurity, tags: 'nginx-modsecurity' }

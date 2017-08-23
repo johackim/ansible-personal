@@ -19,9 +19,9 @@
 [submodule "roles/nodejs"]
 	path = roles/nodejs
 	url = https://github.com/geerlingguy/ansible-role-nodejs
-[submodule "roles/fail2ban"]
-	path = roles/fail2ban
-	url = https://github.com/Oefenweb/ansible-fail2ban
 [submodule "roles/dokku"]
 	path = roles/dokku
 	url = https://github.com/ston3o/ansible-dokku
+[submodule "roles/fail2ban"]
+	path = roles/fail2ban
+	url = https://github.com/Oefenweb/ansible-fail2ban

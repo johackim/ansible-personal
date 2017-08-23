@@ -2,7 +2,7 @@
 user: admin
 manala_motd_template: "{{ playbook_dir ~ '/templates/motd.j2' }}"
 fail2ban_services:
-  - name: ssh
+  - name: sshd
     port: 22
     maxretry: 5
     bantime: -1
