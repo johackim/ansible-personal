@@ -10,6 +10,12 @@ Quick Start
 ansible-playbook playbook.yml -u <user> -i <host>,
 ```
 
+or
+
+```bash
+ansible-playbook playbook.yml -t apt,motd,firewall,fail2ban,nodejs,modsecurity,dokku,os-hardening,ssh-hardening -u <user> -i <host>,
+```
+
 Vagrant
 ---
 
