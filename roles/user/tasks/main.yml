@@ -7,9 +7,6 @@
   authorized_key: user={{ user }} key={{ lookup('file', '~/.ssh/id_rsa.pub') }}
   when: not ansible_check_mode
 
-- name: Unlock ssh user # NOTICE: Execute after ssh-hardening role
-  shell: usermod -p "*" {{ user }}
-
 - name: Add {{ user }} to sudoers
   template: src=templates/sudoers.j2 dest=/etc/sudoers.d/{{ user }}-sudoer validate='visudo -cf %s'
 

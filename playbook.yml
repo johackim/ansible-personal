@@ -6,15 +6,18 @@
     - vars/main.yml
 
   roles:
+    - { role: user, tags: 'user' }
     - { role: apt, tags: 'apt' }
     - { role: motd, tags: 'motd' }
     - { role: firewall, tags: 'firewall' }
     - { role: fail2ban, tags: 'fail2ban' }
     - { role: nodejs, tags: 'nodejs' }
     - { role: unattended-upgrades, tags: 'unattended-upgrades' }
-    - { role: nginx-modsecurity, tags: 'nginx-modsecurity' }
+    - { role: nginx-modsecurity, tags: ['nginx-modsecurity', 'modsecurity'] }
     - { role: dokku, tags: 'dokku' } # NOTICE: Keep this role after nginx
-    - { role: ssh-hardening, tags: 'ssh-hardening' }
-    - { role: os-hardening, tags: 'os-hardening' }
-    - { role: user, tags: 'user' } # NOTICE: Keep this role after ssh-hardening
+    - { role: ssh-hardening, tags: ['ssh-hardening', 'hardening'] }
+    - { role: os-hardening, tags: ['os-hardening', 'hardening'] }
+
+  post_tasks:
+    - shell: usermod -p "*" {{ user }} # Unlock account after ssh-hardening
 ...
