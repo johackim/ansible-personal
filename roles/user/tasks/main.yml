@@ -1,7 +1,7 @@
 ---
 
 - name: Create {{ user }} user
-  user: name={{ user }} shell=/bin/bash groups=sudo,users,docker
+  user: name={{ user }} shell=/bin/bash groups=sudo,users
 
 - name: Add ssh key to {{ user }} user
   authorized_key: user={{ user }} key={{ lookup('file', '~/.ssh/id_rsa.pub') }}
@@ -9,16 +9,3 @@
 
 - name: Add {{ user }} to sudoers
   template: src=templates/sudoers.j2 dest=/etc/sudoers.d/{{ user }}-sudoer validate='visudo -cf %s'
-
-- name: Add dotfiles
-  git: repo=https://github.com/ston3o/dotfiles dest=/home/{{ user }}/.dotfiles update=n
-  become_user: "{{ user }}"
-  become: true
-
-- name: Add tmux.conf
-  file: src=/home/{{ user }}/.dotfiles/{{ item }} dest=/home/{{ user }}/{{ item }} state=link
-  become_user: "{{ user }}"
-  become: true
-  with_items:
-      - .tmux.conf
-      - .tmux
