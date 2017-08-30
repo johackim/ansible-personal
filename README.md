@@ -1,4 +1,4 @@
-Ansible-personal-playbook
+Ansible-personal
 ===
 
 > My personal ansible playbook for debian
