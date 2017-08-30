@@ -30,6 +30,7 @@ sysctl_overwrite:
   kernel.core_uses_pid: 1
 ssh_allow_root_with_key: true
 ssh_print_motd: true
+ssh_allow_tcp_forwarding: true
 sftp_enabled: true
 nodejs_npm_global_packages:
   - name: yarn
