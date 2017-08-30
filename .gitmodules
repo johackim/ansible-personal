@@ -25,3 +25,6 @@
 [submodule "roles/fail2ban"]
 	path = roles/fail2ban
 	url = https://github.com/Oefenweb/ansible-fail2ban
+[submodule "roles/zabbix-agent"]
+	path = roles/zabbix-agent
+	url = https://github.com/ston3o/ansible-zabbix-agent
