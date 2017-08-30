@@ -13,7 +13,7 @@ ansible-playbook playbook.yml -u <user> -i <host>,
 or
 
 ```bash
-ansible-playbook playbook.yml -t apt,motd,security,nodejs,dokku -u <user> -i <host>,
+ansible-playbook playbook.yml -t apt,motd,security,nodejs,dokku,zabbix -e "zabbix_server=zabbix.example.com" -u <user> -i <host>,
 ```
 
 Vagrant

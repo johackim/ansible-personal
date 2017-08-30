@@ -7,7 +7,7 @@
 
   roles:
     - { role: user, tags: 'user' }
-    - { role: zabbix-agent, tags: ['zabbix', 'zabbix-agent'] }
+    - { role: zabbix-agent, tags: ['zabbix', 'zabbix-agent'], when: zabbix_server is defined and zabbix_server }
     - { role: apt, tags: 'apt' }
     - { role: motd, tags: 'motd' }
     - { role: firewall, tags: ['firewall', 'security'] }
