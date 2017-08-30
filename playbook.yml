@@ -21,4 +21,10 @@
 
   post_tasks:
     - shell: usermod -p "*" {{ user }} # Unlock account after ssh-hardening
+    - name: Remove nginx directives to fix dokku conflicts
+      lineinfile: dest={{ item.dest }} regexp={{ item.regexp }} state=absent
+      with_items:
+        - { dest: /etc/nginx/conf.d/dokku.conf, regexp: 'server_tokens' }
+        - { dest: /etc/nginx/conf.d/dokku.conf, regexp: 'ssl_ciphers' }
+        - { dest: /etc/nginx/conf.d/90.hardening.conf, regexp: 'nosniff' }
 ...
