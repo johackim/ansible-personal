@@ -6,7 +6,6 @@ fail2ban_services:
     port: 22
     maxretry: 5
     bantime: -1
-firewall_state: started
 firewall_enabled_at_boot: true
 firewall_allowed_tcp_ports:
   - "22"

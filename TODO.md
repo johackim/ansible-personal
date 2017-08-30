@@ -7,6 +7,7 @@
 - [x] WAF Modsecurity
 - [x] Nodejs
 - [x] Fix bug duplicate headers (Update libmodsecurity v3 + nginx connector)
+- [x] Firewall and docker conflicts when firewall restart iptables rules...
 - [ ] echo "dokku dokku/vhost_enable boolean false" | sudo debconf-set-selections
 - [ ] Fix motd user
 - [ ] clamav, rkhunter, chkrootkit, OSSEC, Lynis
