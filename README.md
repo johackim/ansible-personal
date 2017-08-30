@@ -7,13 +7,25 @@ Quick Start
 ---
 
 ```bash
+ansible-playbook playbook.yml
+```
+
+or
+
+```bash
+ansible-playbook playbook.yml -e 'target=<target>'
+```
+
+or
+
+```bash
 ansible-playbook playbook.yml -u <user> -i <host>,
 ```
 
 or
 
 ```bash
-ansible-playbook playbook.yml -t apt,motd,security,nodejs,dokku,zabbix -e "zabbix_server=zabbix.example.com" -u <user> -i <host>,
+ansible-playbook playbook.yml -t user,zabbix,apt,motd,security,nodejs,dokku -e 'zabbix_server=zabbix.example.com'
 ```
 
 Vagrant
