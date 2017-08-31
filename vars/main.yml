@@ -17,6 +17,7 @@ firewall_allowed_tcp_ports:
   - "993"
   - "10051"
   - "10050"
+  - "10024"
 firewall_allowed_udp_ports:
   - "60001"
   - "60002"

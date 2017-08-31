@@ -1,9 +1,6 @@
 [submodule "roles/motd"]
 	path = roles/motd
 	url = https://github.com/manala/ansible-role-motd
-[submodule "roles/firewall"]
-	path = roles/firewall
-	url = https://github.com/ston3o/ansible-role-firewall
 [submodule "roles/os-hardening"]
 	path = roles/os-hardening
 	url = https://github.com/dev-sec/ansible-os-hardening
@@ -28,3 +25,6 @@
 [submodule "roles/zabbix-agent"]
 	path = roles/zabbix-agent
 	url = https://github.com/ston3o/ansible-zabbix-agent
+[submodule "roles/firewall"]
+	path = roles/firewall
+	url = https://github.com/ston3o/ansible-role-firewall
