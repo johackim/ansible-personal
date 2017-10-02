@@ -14,7 +14,7 @@
     - { role: fail2ban, tags: ['fail2ban', 'security'] }
     - { role: nodejs, tags: 'nodejs' }
     - { role: unattended-upgrades, tags: ['unattended-upgrades', 'security'] }
-    - { role: nginx-modsecurity, tags: ['nginx-modsecurity', 'modsecurity', 'security'] }
+    - { role: nginx-modsecurity, tags: ['nginx-modsecurity', 'modsecurity'] }
     - { role: dokku, tags: 'dokku' } # NOTICE: Keep this role after nginx
     - { role: ssh-hardening, tags: ['ssh-hardening', 'hardening', 'security'] }
     - { role: os-hardening, tags: ['os-hardening', 'hardening', 'security'] }

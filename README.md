@@ -25,7 +25,7 @@ ansible-playbook playbook.yml -u <user> -i <host>,
 or
 
 ```bash
-ansible-playbook playbook.yml -t user,zabbix,apt,motd,security,nodejs,dokku -e 'zabbix_server=zabbix.example.com'
+ansible-playbook playbook.yml -t user,zabbix,apt,motd,security,nodejs,docker,dokku -e 'zabbix_server=zabbix.example.com'
 ```
 
 Vagrant
