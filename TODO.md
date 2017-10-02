@@ -15,3 +15,6 @@
 - [ ] Backups auto
 - [ ] https://github.com/lyrasis/ansible-linux-security-role
 - [ ] Swap
+- [ ] setvar:'tx.allowed_methods=GET HEAD POST OPTIONS DELETE' # REQUEST-901-INITIALIZATION.conf
+- [ ] rm REQUEST-911-METHOD-ENFORCEMENT.conf
+- [ ] https://www.grafikart.fr/formations/serveur-linux/flood-ddos-fail2ban
