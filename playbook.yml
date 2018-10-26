@@ -6,25 +6,15 @@
     - vars/main.yml
 
   roles:
-    - { role: user, tags: 'user' }
-    - { role: zabbix-agent, tags: ['zabbix', 'zabbix-agent'], when: zabbix_server is defined and zabbix_server }
-    - { role: apt, tags: 'apt' }
-    - { role: motd, tags: 'motd' }
-    - { role: firewall, tags: ['firewall', 'security'] }
-    - { role: fail2ban, tags: ['fail2ban', 'security'] }
-    - { role: nodejs, tags: 'nodejs' }
-    - { role: unattended-upgrades, tags: ['unattended-upgrades', 'security'] }
-    - { role: nginx-modsecurity, tags: ['nginx-modsecurity', 'modsecurity'] }
-    - { role: dokku, tags: 'dokku' } # NOTICE: Keep this role after nginx
-    - { role: ssh-hardening, tags: ['ssh-hardening', 'hardening', 'security'] }
-    - { role: os-hardening, tags: ['os-hardening', 'hardening', 'security'] }
+    - { role: user, tags: ['user', 'base'] }
+    - { role: apt, tags: ['apt', 'base'] }
+    - { role: firewall, tags: ['firewall', 'security', 'base'] }
+    - { role: fail2ban, tags: ['fail2ban', 'security', 'base'] }
+    - { role: unattended-upgrades, tags: ['unattended-upgrades', 'security', 'base'] }
+    - { role: ssh-hardening, tags: ['ssh-hardening', 'hardening', 'security', 'base'] }
+    - { role: os-hardening, tags: ['os-hardening', 'hardening', 'security', 'base'] }
+    - { role: nginx-modsecurity, tags: ['nginx-modsecurity', 'nginx', 'modsecurity'], when: nginx_enabled == true }
 
   post_tasks:
     - shell: usermod -p "*" {{ user }} # Unlock account after ssh-hardening
-    - name: Remove nginx directives to fix dokku conflicts
-      lineinfile: dest={{ item.dest }} regexp={{ item.regexp }} state=absent
-      with_items:
-        - { dest: /etc/nginx/conf.d/dokku.conf, regexp: 'server_tokens' }
-        - { dest: /etc/nginx/conf.d/dokku.conf, regexp: 'ssl_ciphers' }
-        - { dest: /etc/nginx/conf.d/90.hardening.conf, regexp: 'nosniff' }
 ...
