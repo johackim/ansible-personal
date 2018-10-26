@@ -1,43 +1,31 @@
 Ansible-personal
 ===
 
-> My personal ansible playbook for debian
+> My personal ansible playbook for debian security
 
-Quick Start
----
-
-```bash
-ansible-playbook playbook.yml
-```
-
-or
+## Quick Start
 
 ```bash
-ansible-playbook playbook.yml -e 'target=<target>'
-```
-
-or
-
-```bash
+git clone --recursive https://github.com/ston3o/ansible-personal
 ansible-playbook playbook.yml -u <user> -i <host>,
 ```
 
-or
+## Example
 
 ```bash
-ansible-playbook playbook.yml -t user,zabbix,apt,motd,security,nodejs,docker,dokku -e 'zabbix_server=zabbix.example.com'
+ansible-playbook playbook.yml -t base -u root -i 127.0.0.1:22,
 ```
 
-Vagrant
----
+## Support
 
-```bash
-vagrant up
-```
+Support me with a monthly donation and help me continue my activities:
 
-License
----
+[![liberapay](https://liberapay.com/assets/widgets/donate.svg)](https://liberapay.com/ston3o/donate)
 
-GNU GPL v3.0
+Buy me a beer (BTC): [bitcoin:112aZxX9Jiya4TM6Le4foxTq9V8U6aVGbG](112aZxX9Jiya4TM6Le4foxTq9V8U6aVGbG)
+
+## License
+
+This project is licensed under the GNU GPL v3.0 - see the [LICENSE.txt](LICENSE.txt) file for details
 
 **Free Software, Hell Yeah!**

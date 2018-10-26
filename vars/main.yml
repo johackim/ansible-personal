@@ -36,3 +36,4 @@ nodejs_npm_global_packages:
 nginx_client_max_body_size: "2M"
 nginx_limit_conn: "default 100"
 nginx_remove_default_site: false
+nginx_enabled: false

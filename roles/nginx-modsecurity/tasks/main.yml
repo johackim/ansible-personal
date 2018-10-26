@@ -83,7 +83,6 @@
 
     - include_role:
         name: nginx-hardening
-        tags: ['nginx-hardening', 'hardening']
 
     - name: remove nginx directives to fix nginx-hardening conflicts
       lineinfile: dest=/etc/nginx/nginx.conf regexp={{ item.regexp }} state=absent
