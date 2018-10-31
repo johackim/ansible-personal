@@ -1,7 +1,7 @@
 Ansible-personal
 ===
 
-> My personal ansible playbook for debian security
+> My personal ansible playbook for debian/ubuntu security
 
 ## Quick Start
 
